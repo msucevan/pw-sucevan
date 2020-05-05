@@ -8,6 +8,7 @@ package it.tss.pw.users;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -51,5 +52,17 @@ public class UserStore {
 
     public User updateByName(User u) {
         return users.put(u.getId(), u);
+    }
+
+    public Collection<User> search(String search) {
+        return users.values().stream()
+                .filter(v -> this.filter(v, search))
+                .collect(Collectors.toList());
+    }
+
+    private boolean filter(User u, String s) {
+        return u.getUsr() != null && u.getUsr().contains(s)
+                || u.getLastName() != null && u.getUsr().contains(s)
+                || u.getFirstName() != null && u.getUsr().contains(s);
     }
 }
