@@ -24,7 +24,8 @@ public class UserStore {
 
     @PostConstruct
     public void init() {
-        Stream.of(new User(1l, "rossi", "rossipwd"), new User(2l, "verdi", "verdipwd"), new User(3l, "bianchi", "bianchipwd"))
+        System.out.println("init()");
+        Stream.of(new User(3l, "marco", "mpwd"), new User(1l, "luca", "lpwd"), new User(2l, "Andrea", "apwd"))
                 .forEach(v -> users.put(v.getId(), v));
     }
 
