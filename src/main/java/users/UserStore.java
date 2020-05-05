@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.tss.pw;
+package users;
 
 import static java.util.Arrays.stream;
 import java.util.Collection;
@@ -33,7 +33,8 @@ public class UserStore {
     }
 
     public User create(User u) {
-        return users.putIfAbsent(u.getId(), u);
+        users.putIfAbsent(u.getId(), u);
+        return users.get(u.getId());
     }
 
     public User update(User u) {
@@ -42,5 +43,9 @@ public class UserStore {
 
     public void delete(Long id) {
         users.remove(id);
+    }
+
+    public User find(Long id) {
+        return users.get(id);
     }
 }
