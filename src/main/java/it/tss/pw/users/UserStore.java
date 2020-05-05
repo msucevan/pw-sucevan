@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package users;
+package it.tss.pw.users;
 
-import static java.util.Arrays.stream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,5 +47,9 @@ public class UserStore {
 
     public User find(Long id) {
         return users.get(id);
+    }
+
+    public User updateByName(User u) {
+        return users.put(u.getId(), u);
     }
 }
