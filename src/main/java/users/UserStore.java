@@ -5,47 +5,83 @@
  */
 package users;
 
-import static java.util.Arrays.stream;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import security.Credential;
 
 /**
  *
  * @author spaceman33
  */
-@ApplicationScoped
+@Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class UserStore {
 
-    private Map<Long, User> users = new HashMap<>();
+    @PersistenceContext(name = "pw")
+    EntityManager em;
 
     @PostConstruct
     public void init() {
-        Stream.of(new User(1l, "rossi", "rossipwd"), new User(2l, "verdi", "verdipwd"), new User(3l, "bianchi", "bianchipwd"))
-                .forEach(v -> users.put(v.getId(), v));
+
     }
 
     public Collection<User> all() {
-        return users.values();
-    }
-
-    public User create(User u) {
-        users.putIfAbsent(u.getId(), u);
-        return users.get(u.getId());
-    }
-
-    public User update(User u) {
-        return users.put(u.getId(), u);
-    }
-
-    public void delete(Long id) {
-        users.remove(id);
+        return em.createNamedQuery(User.FIND_ALL)
+                .getResultList();
     }
 
     public User find(Long id) {
-        return users.get(id);
+        return em.find(User.class, id);
+    }
+
+    public User create(User u) {
+        if (findByUsr(u.getUsr()).isPresent()) {
+            throw new UserAlreadyExistException(u.getUsr());
+        }
+        return em.merge(u);
+    }
+
+    public User update(User u) {
+        return em.merge(u);
+    }
+
+    public void delete(Long id) {
+        em.remove(em.find(User.class, id));
+    }
+
+    public Optional<User> findByUsr(String usr) {
+        return em.createNamedQuery(User.FIND_BY_USR, User.class)
+                .setParameter("usr", usr)
+                .getResultStream()
+                .findFirst();
+    }
+
+    public Collection<User> search(String search) {
+        return em.createNamedQuery(User.SEARCH)
+                .setParameter("fname", "%" + search + "%")
+                .setParameter("lname", "%" + search + "%")
+                .setParameter("usr", "%" + search + "%")
+                .getResultList();
+    }
+
+    public Optional<User> search(Credential credential) {
+        try {
+            User found = em.createNamedQuery(User.FIND_BY_USR_PWD, User.class)
+                    .setParameter("usr", credential.getUsr())
+                    .setParameter("pwd", credential.getPwd())
+                    .getSingleResult();
+            return Optional.of(found);
+        } catch (Exception ex) {
+            Logger.getLogger(UserStore.class.getName()).log(Level.SEVERE, null, ex);
+            return Optional.empty();
+        }
     }
 }

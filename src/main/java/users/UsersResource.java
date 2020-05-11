@@ -16,6 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -44,9 +45,18 @@ public class UsersResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public User create(User u) {
+    public Response create(User u) {
+        if (u.getId() == null) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .header("caused-by", "id inesistente")
+                    .build();
+        }
         User saved = store.create(u);
-        return saved;
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(saved)
+                .build();
     }
 
     @PUT
@@ -55,7 +65,7 @@ public class UsersResource {
     @Produces(MediaType.APPLICATION_JSON)
     public User update(@PathParam("id") Long id, User u) {
         if (u.getId() == null || !u.getId().equals(id)) {
-            throw new IllegalArgumentException("Risorsa con id non valido!");
+            throw new IllegalArgumentException("Risorsa con id sbagliato!");
         }
         return store.update(u);
     }
