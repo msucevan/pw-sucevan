@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package users;
+package it.tss.users;
 
 import java.util.Collection;
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
  *
  * @author spaceman33
  */
-@Path("users")
+@Path("/users")
 public class UsersResource {
 
     @Inject

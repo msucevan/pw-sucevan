@@ -1,13 +1,14 @@
+package it.tss;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.annotation.sql.DataSourceDefinition;
+import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Singleton;
 import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
 
@@ -36,7 +37,7 @@ public class DbConfigurator {
     public static final String MARIADB_USER_PWD = "pwapp";
     public static final String MARIADB_DATABASE_NAME = "pw_sucevan";
     public static final String MARIADB_CLASS_NAME = "org.mariadb.jdbc.MariaDbDataSource";
-    public static final String DS_JNDI_NAME = "java:global/jdbc/pw";
+    public static final String DS_JNDI_NAME = "java:global/jdbc/pw_sucevan";
 
     @Resource(lookup = DS_JNDI_NAME)
     private DataSource pw;
@@ -48,7 +49,7 @@ public class DbConfigurator {
         System.out.println("----------------------- Init DbConfiguration-----------------------");
         jdbcBaseUrl = "jdbc:mariadb://" + MARIADB_HOST + ":" + MARIADB_PORT + "/";
         checkDasource();
-        // migrate();
+        migrate();
         System.out.println("----------------------- End DbConfiguration-----------------------");
     }
 

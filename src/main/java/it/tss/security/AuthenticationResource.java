@@ -14,8 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import security.Credential;
-import users.User;
-import users.UserStore;
+import it.tss.users.User;
+import it.tss.users.UserStore;
 
 /**
  *
