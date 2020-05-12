@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.tss.users;
+package it.tss.pw.users;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -15,7 +15,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import security.Credential;
+import it.tss.pw.security.Credential;
 
 /**
  *

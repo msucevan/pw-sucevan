@@ -1,4 +1,4 @@
-package it.tss.users;
+package it.tss.pw.users;
 
 import java.io.Serializable;
 import java.time.LocalDate;

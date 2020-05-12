@@ -1,4 +1,4 @@
-package security;
+package it.tss.pw.security;
 
 
 import java.io.Serializable;
