@@ -15,7 +15,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import security.Credential;
+import it.tss.security.Credential;
 
 /**
  *
@@ -84,4 +84,5 @@ public class UserStore {
             return Optional.empty();
         }
     }
+
 }

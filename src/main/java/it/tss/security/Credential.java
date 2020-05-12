@@ -1,5 +1,4 @@
-package security;
-
+package it.tss.security;
 
 import java.io.Serializable;
 import java.util.Objects;
