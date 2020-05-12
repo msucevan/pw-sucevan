@@ -1,3 +1,5 @@
+package it.tss;
+
 
 
 import javax.ws.rs.ApplicationPath;
