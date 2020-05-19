@@ -1,5 +1,6 @@
-package it.tss.users;
+package it.tss.pw.users;
 
+import it.tss.pw.AbstractEntity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

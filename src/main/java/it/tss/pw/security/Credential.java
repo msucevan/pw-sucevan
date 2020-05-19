@@ -1,4 +1,4 @@
-package it.tss.security;
+package it.tss.pw.security;
 
 import java.io.Serializable;
 import java.util.Objects;

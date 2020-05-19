@@ -14,7 +14,7 @@ public class PingResource {
 
     @Inject
     @ConfigProperty(name = "message")
-    String message;    
+    String message;
 
     @GET
     public String ping() {

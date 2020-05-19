@@ -1,4 +1,4 @@
-package it.tss.users;
+package it.tss.pw.users;
 
 import javax.ejb.EJBException;
 

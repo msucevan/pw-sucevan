@@ -1,4 +1,4 @@
-package it.tss;
+package it.tss.pw;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -35,7 +35,7 @@ public class DbConfigurator {
     public static final String MARIADB_PROTOCOL = "tcp";
     public static final String MARIADB_USR = "pwapp";
     public static final String MARIADB_USER_PWD = "pwapp";
-    public static final String MARIADB_DATABASE_NAME = "pw_sucevan";
+    public static final String MARIADB_DATABASE_NAME = "pwsucevan";
     public static final String MARIADB_CLASS_NAME = "org.mariadb.jdbc.MariaDbDataSource";
     public static final String DS_JNDI_NAME = "java:global/jdbc/pw_sucevan";
 
